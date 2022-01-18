@@ -1,8 +1,10 @@
-import tkinter
-import os
 
-from screens import *
+import tkinter as tk
+from tkinter import *
+import tkinter.font as tkFont
+
 import utility as util
+from screen.createJournalEntryScreen import CreateJournalEntryScreen
 
 
 class MainApplication(tk.Frame):
@@ -25,10 +27,9 @@ class MainApplication(tk.Frame):
         header.pack(expand=False, fill='both', side='top', anchor='n')
 
         # Header labels
-        Label(header, text="Business Name", bg=util.color_light_green, font='arial 12 bold').place(x=0, y=0)
-        Label(header, text="User Name", bg=util.color_light_green, font='arial 12 normal').place(x=0, y=24)
-        Label(header, text="Jan 11, 2022", bg=util.color_light_green, font='arial 10 italic').place(x=0, y=56)
-        # Label(header, text="Account Lite", relx=1.0, x=0, y=0, anchor="se")
+        Label(header, text="Business Name", bg=header["background"], font='arial 12 bold').place(x=0, y=0)
+        Label(header, text="User Name", bg=header["background"], font='arial 12 normal').place(x=0, y=24)
+        Label(header, text="Jan 11, 2022", bg=header["background"], font='arial 10 italic').place(x=0, y=56)
 
         current_win_title_frame = tk.Frame(header, bg=util.color_dark_green)
         current_win_title_frame.place(height=32, relwidth=1.0, x=0, y=88)
@@ -64,48 +65,41 @@ class MainApplication(tk.Frame):
             widget.destroy()
 
         if n == 0:
-            CreateJournalEntryScreen(self.mainarea)
             self.current_window_title.set("Create Journal Voucher")
+            CreateJournalEntryScreen(self.mainarea)
             pass
         elif n == 1:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Day Book")
+            # ViewJournalEntriesScreen(self.mainarea)
             pass
         elif n == 2:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Journal List")
             pass
         elif n == 3:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Create Ledger")
             pass
         elif n == 4:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Ledger List")
             pass
         elif n == 5:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Ledger View")
             pass
         elif n == 6:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Trial Balance")
             pass
         elif n == 7:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Income & Expenditure Statement")
             pass
         elif n == 8:
-            # ViewJournalEntriesScreen(self.mainarea)
             self.current_window_title.set("Balance Sheet Statement")
             pass
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Pycyptor")
-    root.minsize("900", "600")
+    root.title("AccountLite")
+    root.minsize("1200", "720")
     # root.resizable(0, 0)
-    root.geometry("1360x780")
+    root.geometry("1200x720")
     MainApplication(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
