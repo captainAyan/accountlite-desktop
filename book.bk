@@ -1,0 +1,8 @@
+#BUSINESS=lol co.
+#CURRENCY=Rs.
+#CURRENCY_FORMAT=ind
+#NAME=lol cat
+L1,2,cash
+L2,2,bank
+E1,500,1421113156,1,2,being cash withdrawn from bank
+E2,300,1621193156,2,1,being cash deposited into bank

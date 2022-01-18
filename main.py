@@ -4,13 +4,18 @@ from tkinter import *
 import tkinter.font as tkFont
 
 import utility as util
+from repository import Repository
 from screen.createJournalEntryScreen import CreateJournalEntryScreen
+
+FILE_NAME = 'book.bk'
 
 
 class MainApplication(tk.Frame):
 
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
+
+        self.repo = Repository(FILE_NAME)
 
         self.parent = parent
         self.current_window_title = StringVar()
@@ -66,7 +71,7 @@ class MainApplication(tk.Frame):
 
         if n == 0:
             self.current_window_title.set("Create Journal Voucher")
-            CreateJournalEntryScreen(self.mainarea)
+            CreateJournalEntryScreen(self.mainarea, self.repo)
             pass
         elif n == 1:
             self.current_window_title.set("Day Book")

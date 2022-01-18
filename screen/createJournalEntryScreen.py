@@ -1,11 +1,14 @@
 import tkinter as tk
 from tkinter import *
+import time
 import utility as util
 
 
 class CreateJournalEntryScreen(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, repo, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
+
+        self.repo = repo
         self.parent = parent
 
         label_font = "arial 12 normal"
@@ -27,12 +30,8 @@ class CreateJournalEntryScreen(tk.Frame):
                                           selectbackground=util.color_dark_green)
         self.ledger_list_box.place(x=0, y=20, relwidth=1, relheight=0.9)
 
-        self.ledger_list_box.insert(1, "Python")
-        self.ledger_list_box.insert(2, "Perl")
-        self.ledger_list_box.insert(3, "C")
-        self.ledger_list_box.insert(4, "PHP")
-        self.ledger_list_box.insert(5, "JSP")
-        self.ledger_list_box.insert(6, "Ruby")
+        for l in self.repo.ledgers:
+            self.ledger_list_box.insert(l.id, l.name)
 
         self.ledger_list_box.focus()
         self.ledger_list_box.bind('<Return>', lambda event: self.list_enter())
@@ -94,14 +93,15 @@ class CreateJournalEntryScreen(tk.Frame):
         self.narration.set("")
         self.ledger_list_box.focus()
         modal.destroy()
+        self.repo.add_entry(amount, int(time.time()), debit, credit, narration)
 
     def rectify_error(self, modal, widget):
         widget.focus()
         modal.destroy()
 
     def submit(self):
-        debit = self.debit_account.get()
-        credit = self.credit_account.get()
+        debit = self.debit_account.get().strip()
+        credit = self.credit_account.get().strip()
         amount = util.string_to_int(self.amount.get().strip())
         narration = self.narration.get().strip()
 
