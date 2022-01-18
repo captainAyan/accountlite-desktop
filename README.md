@@ -1,1 +1,1 @@
-# accountlite-gui
+# accountlite-desktop
