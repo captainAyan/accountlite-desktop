@@ -22,11 +22,27 @@ def string_to_int(val):
         return 0
 
 
+def format_currency(amount, _type, currency):
+    if _type == "int":
+        return currency + ("{:,}".format(amount))
+
+    elif _type == "ind":
+        s, *d = str(amount).partition(".")
+        r = ",".join([s[x - 2:x] for x in range(-3, -len(s), -2)][::-1] + [s[-3:]])
+        return currency + ("".join([r] + d))
+
+    else:
+        return ""
+
+
 class Modal:
     TYPE_ALERT = 1
     TYPE_QUESTION = 2
 
     def __init__(self, parent, message, modal_type):
+
+        self.type = modal_type
+
         self.positive_method = None
         self.negative_method = None
         # modal
@@ -37,13 +53,13 @@ class Modal:
 
         self.modal.focus()
         self.modal.bind("<Return>", lambda event: self.positive_method())
-        self.modal.bind("<Escape>", lambda event: self.negative_method())
+        self.modal.bind("<Escape>", lambda event: self.cancel_modal())
         self.modal.bind("<Tab>", lambda event: 'break')
 
-        if modal_type == Modal.TYPE_ALERT:
+        if self.type == Modal.TYPE_ALERT:
             tk.Button(self.modal, text="Okay", background=self.modal["background"], border=0, font="arial 12 bold",
                       command=lambda: self.positive_method()).place(relx=0.5, rely=0.9, anchor='center')
-        elif modal_type == Modal.TYPE_QUESTION:
+        elif self.type == Modal.TYPE_QUESTION:
             tk.Button(self.modal, text="Yes", background=self.modal["background"], border=0, font="arial 12 bold",
                       command=lambda: self.positive_method()).place(relx=0.1, rely=0.9, anchor='sw')
             tk.Button(self.modal, text="No", background=self.modal["background"], border=0, font="arial 12 bold",
@@ -53,6 +69,12 @@ class Modal:
         for widget in self.modal.winfo_children():
             widget.destroy()
         self.modal.destroy()
+
+    def cancel_modal(self):
+        if self.type == Modal.TYPE_QUESTION:
+            self.negative_method()
+        else:
+            self.positive_method()
 
     def set_positive(self, method):
         self.positive_method = method

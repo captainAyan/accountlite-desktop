@@ -6,6 +6,9 @@ import tkinter.font as tkFont
 import utility as util
 from repository import Repository
 from screen.createJournalEntryScreen import CreateJournalEntryScreen
+from screen.viewDayBookScreen import ViewDayBookScreen
+from screen.viewJournalList import ViewJournalList
+from screen.createLedgerScreen import CreateLedgerScreen
 
 FILE_NAME = 'book.bk'
 
@@ -42,6 +45,9 @@ class MainApplication(tk.Frame):
               fg=util.color_white, bg=util.color_dark_green).place(x=0, y=4)
         self.current_window_title.set("Welcome Screen")
 
+        tk.Button(current_win_title_frame, text="✕", borderwidth=0, font="size=24",
+                  command=lambda:self.change_tab(-1)).place(width=32, height=32, relx=1, rely=0, anchor="ne")
+
         tk.Button(sidebar, text="[Q] Journal Voucher", **btn_style, command=lambda:self.change_tab(0)).place(**btn_size, x=0, y=0)
         tk.Button(sidebar, text="[W] Day Book", **btn_style, command=lambda:self.change_tab(1)).place(**btn_size, x=0, y=40)
         tk.Button(sidebar, text="[E] Journal List", **btn_style, command=lambda:self.change_tab(2)).place(**btn_size, x=0, y=80)
@@ -75,13 +81,15 @@ class MainApplication(tk.Frame):
             pass
         elif n == 1:
             self.current_window_title.set("Day Book")
-            # ViewJournalEntriesScreen(self.mainarea)
+            ViewDayBookScreen(self.mainarea, self.repo)
             pass
         elif n == 2:
             self.current_window_title.set("Journal List")
+            ViewJournalList(self.mainarea, self.repo)
             pass
         elif n == 3:
             self.current_window_title.set("Create Ledger")
+            CreateLedgerScreen(self.mainarea, self.repo)
             pass
         elif n == 4:
             self.current_window_title.set("Ledger List")
@@ -97,6 +105,9 @@ class MainApplication(tk.Frame):
             pass
         elif n == 8:
             self.current_window_title.set("Balance Sheet Statement")
+            pass
+        else:
+            self.current_window_title.set("Welcome Screen")
             pass
 
 

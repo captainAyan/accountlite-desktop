@@ -26,8 +26,7 @@ class CreateJournalEntryScreen(tk.Frame):
         tk.Label(ledger_list_frame, text="LEDGER LIST", justify=CENTER, bg=util.color_dark_green, fg=util.color_white,
                  font="arial 10 bold").place(x=0, y=0, relwidth=1)
         self.ledger_list_box = tk.Listbox(ledger_list_frame, background=ledger_list_frame["background"], borderwidth=0,
-                                          highlightthickness=0, font=label_font,
-                                          selectbackground=util.color_dark_green)
+                                          highlightthickness=0, font=label_font, selectbackground=util.color_dark_green)
         self.ledger_list_box.place(x=0, y=20, relwidth=1, relheight=0.9)
 
         for l in self.repo.ledgers:

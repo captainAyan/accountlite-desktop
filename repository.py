@@ -31,6 +31,10 @@ class Repository:
 
         open(self.file_name, 'w').write(self.stringify())
 
+    def add_ledger(self, name, _type):
+        self.ledgers.append(Ledger(len(self.ledgers)+1, _type, name))
+        open(self.file_name, 'w').write(self.stringify())
+
     def stringify(self):
         output = ""
 
