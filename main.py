@@ -7,6 +7,7 @@ from datetime import date
 import utility as util
 from repository import Repository
 from screen.viewLedgerScreen import ViewLedgerScreen
+from screen.viewTrialBalanceScreen import ViewTrialBalanceScreen
 from screen.welcomeScreen import WelcomeScreen
 from screen.createJournalEntryScreen import CreateJournalEntryScreen
 from screen.viewDayBookScreen import ViewDayBookScreen
@@ -107,6 +108,7 @@ class MainApplication(tk.Frame):
             pass
         elif n == 5:
             self.current_window_title.set("Trial Balance")
+            ViewTrialBalanceScreen(self.mainarea, self.repo)
             pass
         elif n == 6:
             self.current_window_title.set("Income & Expenditure Statement")

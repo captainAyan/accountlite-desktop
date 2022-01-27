@@ -96,6 +96,9 @@ class ViewJournalListScreen(tk.Frame):
         journals = []
         for j in reversed(self.repo.journals):
 
+            if from_date.timestamp() > j.time:
+                break
+
             if from_date.timestamp() <= j.time < to_date.timestamp():
                 journals.append(("#" + str(j.id), datetime.fromtimestamp(j.time).strftime('%Y-%m-%d'),
                                  j.debit.name.capitalize() + " A/c", j.credit.name.capitalize() + " A/c",
