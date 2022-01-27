@@ -46,7 +46,8 @@ class Modal:
         self.positive_method = None
         self.negative_method = None
         # modal
-        self.modal = tk.Frame(parent, bg=color_orange, height=200, width=200)
+        self.modal = tk.Frame(parent, background=color_orange, height=200, width=200, highlightbackground=color_red,
+                              highlightthickness=1)
         self.modal.place(x=0, rely=1, anchor='sw')
         tk.Label(self.modal, text=message, bg=self.modal["background"],
                  font="arial 12 normal", wraplength=200).place(relx=0.5, rely=0.3, anchor='center')

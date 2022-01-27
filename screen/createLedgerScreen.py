@@ -25,7 +25,7 @@ class CreateLedgerScreen(tk.Frame):
         # type
         tk.Label(self.parent, text="Ledger Type ", bg=self.parent["background"], font=label_font).place(x=20, y=70)
         self.type_list_box = tk.Listbox(self.parent, background=util.color_light_green, borderwidth=0,
-                                   highlightthickness=0, font=label_font, selectbackground=util.color_dark_green)
+                                        highlightthickness=0, font=label_font, selectbackground=util.color_dark_green)
         self.type_list_box.place(x=128, y=70, width=200, height=100)
 
         self.type_list_box.insert(0, "Revenue")
@@ -48,12 +48,12 @@ class CreateLedgerScreen(tk.Frame):
         for l in self.repo.ledgers:
             if l.name == self.ledger_name.get().strip():
                 modal = util.Modal(self.parent, "Ledger already exists.", util.Modal.TYPE_ALERT)
-                modal.set_positive(lambda: self.name_entry.focus())
+                modal.set_positive(lambda: self.rectify_error(modal, self.name_entry))
                 return
 
         if self.ledger_name.get().strip() == "":
             modal = util.Modal(self.parent, "Invalid ledger name.", util.Modal.TYPE_ALERT)
-            modal.set_positive(lambda: self.name_entry.focus())
+            modal.set_positive(lambda: self.rectify_error(modal, self.name_entry))
             return
 
         modal = util.Modal(self.parent, "Are you sure about creating the ledger ?", util.Modal.TYPE_QUESTION)
@@ -74,3 +74,4 @@ class CreateLedgerScreen(tk.Frame):
 
         modal.destroy()
         self.ledger_name.set("")
+        self.name_entry.focus()

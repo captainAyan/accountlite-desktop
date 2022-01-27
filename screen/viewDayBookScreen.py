@@ -30,19 +30,19 @@ class ViewDayBookScreen(tk.Frame):
         tree = ttk.Treeview(self.parent, columns=columns, show='headings', selectmode="browse")
 
         tree.heading('id', text='No.')
-        tree.column('id', minwidth=0, width=20)
+        tree.column('id', minwidth=0, width=60, stretch=NO)
 
         tree.heading('date', text='Date')
-        tree.column('date', minwidth=0, width=100)
+        tree.column('date', minwidth=0, width=100, stretch=NO)
 
         tree.heading('debit', text='Debit')
-        tree.column('debit', minwidth=0, width=100)
+        tree.column('debit', minwidth=0, width=200, stretch=NO)
 
         tree.heading('credit', text='Credit')
-        tree.column('credit', minwidth=0, width=100)
+        tree.column('credit', minwidth=0, width=200, stretch=NO)
 
         tree.heading('amount', text='Amount')
-        tree.column('amount', minwidth=0, width=150, anchor="e")
+        tree.column('amount', minwidth=0, width=150, anchor="e", stretch=NO)
 
         tree.heading('narration', text='Narration')
         tree.column('narration', minwidth=0, width=300)
