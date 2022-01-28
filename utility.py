@@ -14,6 +14,12 @@ color_red = "#ff4d4d"
 color_warning = "#ffaf40"
 color_info = "#18dcff"
 
+initial_bk_file = '''#BUSINESS=Example Business
+#CURRENCY=Rs.
+#CURRENCY_FORMAT=ind
+#NAME=Example User Name
+'''
+
 
 def string_to_int(val):
     try:

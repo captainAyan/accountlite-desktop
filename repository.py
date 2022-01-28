@@ -2,6 +2,8 @@ from model.Entry import Entry
 from model.Journal import Journal
 from model.Ledger import Ledger
 
+import utility as util
+
 
 class Repository:
     def __init__(self, file_name):
@@ -11,7 +13,13 @@ class Repository:
         self.ledgers = []
         self.journals = []
 
-        self.parse(open(self.file_name, 'r').read())
+        try:
+            self.parse(open(self.file_name, 'r').read())
+        except FileNotFoundError:
+            f = open(self.file_name, "w")
+            f.write(util.initial_bk_file)
+            f.close()
+            self.parse(util.initial_bk_file)
 
     def add_entry(self, amount, time, debit_name, credit_name, narration):
         debit = None
