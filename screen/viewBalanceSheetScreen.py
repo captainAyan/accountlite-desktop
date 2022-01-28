@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import utility as util
 
 
-class ViewIncomeAndExpenditureStatementScreen(tk.Frame):
+class ViewBalanceSheetScreen(tk.Frame):
     def __init__(self, parent, repo, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
 
@@ -84,12 +84,27 @@ class ViewIncomeAndExpenditureStatementScreen(tk.Frame):
                 ledger_balance_dict[j.debit.id] = ledger_balance_dict[j.debit.id] + j.amount
                 ledger_balance_dict[j.credit.id] = ledger_balance_dict[j.credit.id] - j.amount
 
-        # Revenue
-        self.tree.insert('', tk.END, values=("", "Revenue [A]", "", ""), tags=('title',))
-        total_revenue = 0
+        # Surplus/(Deficit)
+        total_surplus = 0
         for k in self.repo.ledgers:
             if k.type == 0:
-                total_revenue -= ledger_balance_dict[k.id]
+                total_surplus -= ledger_balance_dict[k.id]
+            elif k.type == 1:
+                total_surplus -= ledger_balance_dict[k.id]
+
+        # Equity & Liability
+        self.tree.insert('', tk.END, values=("", "Equity & Liability", "", ""), tags=('title',))
+
+        self.tree.insert('', tk.END, values=("", "Surplus/(Deficit)",
+                                             util.format_currency(total_surplus,
+                                                                  self.repo.meta_data_dict['CURRENCY_FORMAT'],
+                                                                  self.repo.meta_data_dict['CURRENCY']), ""),
+                         tags=('total',))
+
+        total_liability = 0
+        for k in self.repo.ledgers:
+            if k.type == 3 or k.type == 4:
+                total_liability -= ledger_balance_dict[k.id]
                 balance_text = util.format_currency(-ledger_balance_dict[k.id],
                                                     self.repo.meta_data_dict['CURRENCY_FORMAT'],
                                                     self.repo.meta_data_dict['CURRENCY'])
@@ -98,17 +113,17 @@ class ViewIncomeAndExpenditureStatementScreen(tk.Frame):
                 self.tree.insert('', tk.END, values=i)
 
         self.tree.insert('', tk.END, values=("", "Total", "",
-                                             util.format_currency(total_revenue,
+                                             util.format_currency(total_liability + total_surplus,
                                                                   self.repo.meta_data_dict['CURRENCY_FORMAT'],
                                                                   self.repo.meta_data_dict['CURRENCY'])),
                          tags=('total',))
 
-        # Expenses
-        self.tree.insert('', tk.END, values=("", "Expenditure [B]", "", ""), tags=('title',))
-        total_expenditure = 0
+        # Asset
+        self.tree.insert('', tk.END, values=("", "Asset", "", ""), tags=('title',))
+        total_asset = 0
         for k in self.repo.ledgers:
-            if k.type == 1:
-                total_expenditure += ledger_balance_dict[k.id]
+            if k.type == 2:
+                total_asset += ledger_balance_dict[k.id]
                 balance_text = util.format_currency(ledger_balance_dict[k.id],
                                                     self.repo.meta_data_dict['CURRENCY_FORMAT'],
                                                     self.repo.meta_data_dict['CURRENCY'])
@@ -117,17 +132,10 @@ class ViewIncomeAndExpenditureStatementScreen(tk.Frame):
                 self.tree.insert('', tk.END, values=i)
 
         self.tree.insert('', tk.END, values=("", "Total", "",
-                                             util.format_currency(total_expenditure,
+                                             util.format_currency(total_asset,
                                                                   self.repo.meta_data_dict['CURRENCY_FORMAT'],
                                                                   self.repo.meta_data_dict['CURRENCY'])),
                          tags=('total',))
-
-        # Bottom line
-        self.tree.insert('', tk.END, values=("", "Surplus/(Deficit) [A - B]", "",
-                                             util.format_currency(total_revenue - total_expenditure,
-                                                                  self.repo.meta_data_dict['CURRENCY_FORMAT'],
-                                                                  self.repo.meta_data_dict['CURRENCY'])),
-                         tags=('title',))
 
     def rectify_error(self, modal, widget):
         widget.focus()

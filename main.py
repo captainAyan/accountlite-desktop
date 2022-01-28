@@ -6,6 +6,7 @@ from datetime import date
 
 import utility as util
 from repository import Repository
+from screen.viewBalanceSheetScreen import ViewBalanceSheetScreen
 from screen.viewIncomeAndExpenditureStatementScreen import ViewIncomeAndExpenditureStatementScreen
 from screen.viewLedgerScreen import ViewLedgerScreen
 from screen.viewTrialBalanceScreen import ViewTrialBalanceScreen
@@ -67,6 +68,8 @@ class MainApplication(tk.Frame):
         tk.Button(sidebar, text="[Y] Trial Balance", **btn_style, command=lambda:self.change_tab(5)).place(**btn_size, x=0, y=200)
         tk.Button(sidebar, text="[U] Income Statement", **btn_style, command=lambda:self.change_tab(6)).place(**btn_size, x=0, y=240)
         tk.Button(sidebar, text="[I] Balance Sheet", **btn_style, command=lambda:self.change_tab(7)).place(**btn_size, x=0, y=280)
+        tk.Button(sidebar, text="[O] Edit Ledger", **btn_style, command=lambda: self.change_tab(8)).place(**btn_size, x=0, y=320)
+        tk.Button(sidebar, text="[P] Settings", **btn_style, command=lambda: self.change_tab(9)).place(**btn_size, x=0, y=360)
 
         self.mainarea = tk.Frame(self.parent, bg=util.color_yellow, width=500, height=500)
         self.mainarea.pack(expand=True, fill='both', side='right')
@@ -79,6 +82,8 @@ class MainApplication(tk.Frame):
         self.parent.bind('<Control-y>', lambda event: self.change_tab(5))
         self.parent.bind('<Control-u>', lambda event: self.change_tab(6))
         self.parent.bind('<Control-i>', lambda event: self.change_tab(7))
+        self.parent.bind('<Control-o>', lambda event: self.change_tab(8))
+        self.parent.bind('<Control-p>', lambda event: self.change_tab(9))
 
         # setting the welcome screen
         self.change_tab(-1)
@@ -117,6 +122,13 @@ class MainApplication(tk.Frame):
             pass
         elif n == 7:
             self.current_window_title.set("Balance Sheet Statement")
+            ViewBalanceSheetScreen(self.mainarea, self.repo)
+            pass
+        elif n == 8:
+            self.current_window_title.set("Edit Ledger")
+            pass
+        elif n == 9:
+            self.current_window_title.set("Settings")
             pass
         else:
             self.current_window_title.set("Welcome Screen")
