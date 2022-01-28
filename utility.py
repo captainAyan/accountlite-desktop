@@ -29,16 +29,24 @@ def string_to_int(val):
 
 
 def format_currency(amount, _type, currency):
+    c = ""
+    a = abs(amount)
+
     if _type == "int":
-        return currency + ("{:,}".format(amount))
+        c = currency + ("{:,}".format(a))
 
     elif _type == "ind":
-        s, *d = str(amount).partition(".")
+        s, *d = str(a).partition(".")
         r = ",".join([s[x - 2:x] for x in range(-3, -len(s), -2)][::-1] + [s[-3:]])
-        return currency + ("".join([r] + d))
+        c = currency + ("".join([r] + d))
 
     else:
-        return ""
+        c = ""
+
+    if amount < 0:
+        c = "(" + c + ")"
+
+    return c
 
 
 class Modal:
