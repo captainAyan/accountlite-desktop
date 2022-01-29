@@ -6,6 +6,7 @@ from datetime import date
 
 import utility as util
 from repository import Repository
+from screen.editLedgerScreen import EditLedgerScreen
 from screen.settingsScreen import SettingsScreen
 from screen.viewBalanceSheetScreen import ViewBalanceSheetScreen
 from screen.viewIncomeAndExpenditureStatementScreen import ViewIncomeAndExpenditureStatementScreen
@@ -130,6 +131,7 @@ class MainApplication(tk.Frame):
             pass
         elif n == 8:
             self.current_window_title.set("Edit Ledger")
+            EditLedgerScreen(self.mainarea, self.repo)
             pass
         elif n == 9:
             self.current_window_title.set("Settings")
