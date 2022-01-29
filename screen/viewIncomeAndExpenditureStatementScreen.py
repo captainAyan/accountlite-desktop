@@ -19,8 +19,8 @@ class ViewIncomeAndExpenditureStatementScreen(tk.Frame):
         style = ttk.Style()
 
         style.theme_use("default")
-        style.configure("Treeview", background=util.color_light_green, foreground=util.color_black,
-                        fieldbackground=util.color_light_green, font=label_font, borderwidth=0, rowheight=40)
+        style.configure("Treeview", background=util.color_yellow, foreground=util.color_black,
+                        fieldbackground=util.color_yellow, font=label_font, borderwidth=0, rowheight=40)
         style.map('Treeview', background=[('selected', util.color_dark_green)])
 
         style.configure("Treeview.Heading", background=util.color_dark_green, foreground=util.color_white,

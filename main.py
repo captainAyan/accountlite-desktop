@@ -6,6 +6,7 @@ from datetime import date
 
 import utility as util
 from repository import Repository
+from screen.settingsScreen import SettingsScreen
 from screen.viewBalanceSheetScreen import ViewBalanceSheetScreen
 from screen.viewIncomeAndExpenditureStatementScreen import ViewIncomeAndExpenditureStatementScreen
 from screen.viewLedgerScreen import ViewLedgerScreen
@@ -40,13 +41,16 @@ class MainApplication(tk.Frame):
         header = tk.Frame(self.parent, bg=util.color_light_green, height=120)
         header.pack(expand=False, fill='both', side='top', anchor='n')
 
+        self.business = StringVar(value=self.repo.meta_data_dict['BUSINESS'])
+        self.name = StringVar(value=self.repo.meta_data_dict['NAME'])
+
         # Header labels
         tk.Label(header, text="Business Name ", bg=header["background"], font='arial 12 normal').place(x=10, y=4)
-        tk.Label(header, text=self.repo.meta_data_dict['BUSINESS'], bg=header["background"], font='arial 12 bold')\
+        tk.Label(header, textvariable=self.business, bg=header["background"], font='arial 12 bold')\
             .place(x=128, y=4)
 
         tk.Label(header, text="User Name ", bg=header["background"], font='arial 12 normal').place(x=10, y=30)
-        tk.Label(header, text=self.repo.meta_data_dict['NAME'], bg=header["background"], font='arial 12 bold')\
+        tk.Label(header, textvariable=self.name, bg=header["background"], font='arial 12 bold')\
             .place(x=128, y=30)
 
         tk.Label(header, text="Started At - "+str(date.today()), bg=header["background"], font='arial 12 italic')\
@@ -129,6 +133,7 @@ class MainApplication(tk.Frame):
             pass
         elif n == 9:
             self.current_window_title.set("Settings")
+            SettingsScreen(self.mainarea, self.repo, self.business, self.name)
             pass
         else:
             self.current_window_title.set("Welcome Screen")

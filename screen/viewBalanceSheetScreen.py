@@ -19,9 +19,9 @@ class ViewBalanceSheetScreen(tk.Frame):
         style = ttk.Style()
 
         style.theme_use("default")
-        style.configure("Treeview", background=util.color_light_green, foreground=util.color_black,
-                        fieldbackground=util.color_light_green, font=label_font, borderwidth=0, rowheight=40)
-        style.map('Treeview', background=[('selected', util.color_dark_green)])
+        style.configure("Treeview", background=util.color_orange, foreground=util.color_black,
+                        fieldbackground=util.color_orange, font=label_font, borderwidth=0, rowheight=40)
+        style.map('Treeview', background=[('selected', util.color_red)])
 
         style.configure("Treeview.Heading", background=util.color_dark_green, foreground=util.color_white,
                         font=header_font, borderwidth=1)
@@ -45,7 +45,7 @@ class ViewBalanceSheetScreen(tk.Frame):
 
         self.tree.pack(anchor=N, fill=BOTH, expand=True, side=BOTTOM)
 
-        self.tree.tag_configure('title', font=header_font, background=util.color_dark_green, foreground=util.color_white)
+        self.tree.tag_configure('title', font=header_font, background=util.color_red, foreground=util.color_white)
         self.tree.tag_configure('total', font=header_font)
 
         filter_frame = Frame(self.parent, bg=util.color_yellow, height=42)

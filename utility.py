@@ -32,16 +32,13 @@ def format_currency(amount, _type, currency):
     c = ""
     a = abs(amount)
 
-    if _type == "int":
-        c = currency + ("{:,}".format(a))
-
-    elif _type == "ind":
+    if _type == "ind":
         s, *d = str(a).partition(".")
         r = ",".join([s[x - 2:x] for x in range(-3, -len(s), -2)][::-1] + [s[-3:]])
         c = currency + ("".join([r] + d))
 
     else:
-        c = ""
+        c = currency + ("{:,}".format(a))
 
     if amount < 0:
         c = "(" + c + ")"

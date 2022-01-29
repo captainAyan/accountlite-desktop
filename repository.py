@@ -43,6 +43,13 @@ class Repository:
         self.ledgers.append(Ledger(len(self.ledgers)+1, _type, name))
         open(self.file_name, 'w').write(self.stringify())
 
+    def save_settings(self, business, name, currency, currency_format):
+        self.meta_data_dict['BUSINESS'] = business
+        self.meta_data_dict['NAME'] = name
+        self.meta_data_dict['CURRENCY'] = currency
+        self.meta_data_dict['CURRENCY_FORMAT'] = currency_format
+        open(self.file_name, 'w').write(self.stringify())
+
     def stringify(self):
         output = ""
 
