@@ -93,9 +93,7 @@ class EditLedgerScreen(tk.Frame):
                 return
 
         if self.ledger_name.get().strip() == "":
-            modal = util.Modal(self.parent, "Invalid ledger name.", util.Modal.TYPE_ALERT)
-            modal.set_positive(lambda: self.rectify_error(modal, self.name_entry))
-            return
+            self.ledger_name.set(self.repo.ledgers[self.selected_ledger_index].name)
 
         modal = util.Modal(self.parent, "Are you sure about changing the ledger ?", util.Modal.TYPE_QUESTION)
 
