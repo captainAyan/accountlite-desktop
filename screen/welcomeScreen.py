@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 import webbrowser
+from PIL import ImageTk, Image
+import os
 
 import utility as util
 
@@ -19,10 +21,13 @@ class WelcomeScreen(tk.Frame):
         header = tk.Frame(outer_header, background=outer_header["background"])
         header.place(relx=0.5, rely=0.5, anchor=CENTER)
 
+        self.img = ImageTk.PhotoImage(Image.open(os.path.join(os.path.dirname(__file__), "../assets/icon.png")))
+        tk.Label(header, image=self.img, bg=header["background"]).pack(side="top", fill="both", expand="yes")
+
         head_text = '''Welcome to AccountLite'''
         sub_text = '''Lightweight accounting software mainly focused\ntowards Double-Entry accounting system'''
 
-        tk.Label(header, text=head_text, bg=header["background"], font="arial 32 normal").pack()
+        tk.Label(header, text=head_text, bg=header["background"], font="arial 32 normal").pack(pady=(16, 10))
         tk.Label(header, text=sub_text, bg=header["background"], font="arial 12 normal").pack()
 
         link = Label(header, text="Ayan Chakraborty - @CaptainAyan (Github)", fg="blue", cursor="hand2", bg=header["background"])
