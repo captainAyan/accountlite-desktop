@@ -7,9 +7,9 @@
     <a href="https://github.com/captainAyan/accountlite-desktop/issues">Report Bug 😓</a>
   </p>
 </p>
-<center>
+<p align="center">
 <a href="https://github.com/captainAyan/accountlite-desktop"><img src="https://raw.githubusercontent.com/captainAyan/accountlite-desktop/main/screenshots/1.png"></a>
-</center>
+</p>
 
 ## About
 
