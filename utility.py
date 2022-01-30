@@ -5,14 +5,9 @@ color_light_green = "#D6F6D6"
 color_dark_green = "#008080"
 color_orange = "#FFDDCC"
 color_grey = "#D0D0D0"
+color_red = "#ff4d4d"
 color_white = "#FFFFFF"
 color_black = "#000000"
-
-color_success = "#32ff7e"
-color_danger = "#ff4d4d"
-color_red = "#ff4d4d"
-color_warning = "#ffaf40"
-color_info = "#18dcff"
 
 initial_bk_file = '''#BUSINESS=Example Business
 #CURRENCY=Rs.
