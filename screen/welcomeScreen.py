@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+import webbrowser
 
 import utility as util
 
@@ -23,3 +24,7 @@ class WelcomeScreen(tk.Frame):
 
         tk.Label(header, text=head_text, bg=header["background"], font="arial 32 normal").pack()
         tk.Label(header, text=sub_text, bg=header["background"], font="arial 12 normal").pack()
+
+        link = Label(header, text="Ayan Chakraborty - @CaptainAyan (Github)", fg="blue", cursor="hand2", bg=header["background"])
+        link.pack()
+        link.bind("<Button-1>", lambda e: webbrowser.open_new("https://github.com/captainAyan"))
